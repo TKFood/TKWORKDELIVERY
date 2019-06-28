@@ -204,6 +204,8 @@ namespace TKWORKDELIVERY
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
 
+            textBox4.Text = "160115";
+
         }
         public void SETSTATUS2()
         {
@@ -487,6 +489,7 @@ namespace TKWORKDELIVERY
         private void button2_Click(object sender, EventArgs e)
         {
             STATUS = "ADD";
+            
             SETSTATUS();
         }
 
