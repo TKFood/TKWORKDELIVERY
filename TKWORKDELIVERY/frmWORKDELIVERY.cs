@@ -147,6 +147,177 @@ namespace TKWORKDELIVERY
                 }
             }
         }
+
+        public void SETSTATUS()
+        {
+            textBox1.Text = null;
+            textBox2.Text = null;
+            textBox3.Text = null;
+            textBox4.Text = null;
+            textBoxID.Text = null;
+            textBox1.ReadOnly = false;
+            textBox2.ReadOnly = false;
+            textBox3.ReadOnly = false;
+            textBox4.ReadOnly = false;
+
+        }
+        public void SETSTATUS2()
+        {
+            textBox1.ReadOnly = false;
+            textBox2.ReadOnly = false;
+            textBox3.ReadOnly = false;
+            textBox4.ReadOnly = false;
+
+        }
+        public void SETSTAUSFIANL()
+        {
+            textBox1.ReadOnly = true;
+            textBox2.ReadOnly = true;
+            textBox3.ReadOnly = true;
+            textBox4.ReadOnly = true;
+        }
+
+        public void UPDATE()
+        {
+            try
+            {
+
+                //add ZWAREWHOUSEPURTH
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.AppendFormat(" UPDATE   [TKWORKDELIVERY].[dbo].[WORKDELIVERY]");
+                sbSql.AppendFormat(" SET [NO]='{0}',[DATES]='{1}',[CREATEOR]='{2}',[SENDTO]='{3}',[MESSAGE]='{4}',[REPLY]='{5}',[STATUS]='{6}',[CREATEORID]='{7}'", textBox1.Text, dateTimePicker3.Value.ToString("yyyyMMdd"), comboBox2.Text, comboBox3.Text, textBox2.Text, textBox3.Text, comboBox4.Text, textBox4.Text);
+                sbSql.AppendFormat(" WHERE  [ID]='{0}'",textBoxID.Text);
+                sbSql.AppendFormat(" ");
+                sbSql.AppendFormat(" ");
+                sbSql.AppendFormat(" ");
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+
+
+                }
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
+        public void ADD()
+        {
+            try
+            {
+
+                //add ZWAREWHOUSEPURTH
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
+                sbSql.AppendFormat(" INSERT INTO [TKWORKDELIVERY].[dbo].[WORKDELIVERY]");
+                sbSql.AppendFormat(" ( [NO],[DATES],[CREATEOR],[SENDTO],[MESSAGE],[REPLY],[STATUS],[CREATEORID])");
+                sbSql.AppendFormat(" VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}')", textBox1.Text, dateTimePicker3.Value.ToString("yyyyMMdd"), comboBox2.Text, comboBox3.Text, textBox2.Text, textBox3.Text, comboBox4.Text, textBox4.Text);
+                sbSql.AppendFormat(" ");
+                sbSql.AppendFormat(" ");
+
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+
+
+                }
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+        public void DEL()
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
+
+              
+                sbSql.AppendFormat(" ");
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+                }
+
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+
+        }
+
+
         #endregion
 
         #region BUTTON
@@ -156,8 +327,59 @@ namespace TKWORKDELIVERY
             Search();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            STATUS = "ADD";
+            SETSTATUS();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            STATUS = "EDIT";
+
+            SETSTATUS2();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (STATUS.Equals("EDIT"))
+            {
+                UPDATE();
+            }
+            else if (STATUS.Equals("ADD"))
+            {
+                ADD();
+            }
+
+            STATUS = null;
+
+            SETSTAUSFIANL();
+
+            Search();
+            MessageBox.Show("完成");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            STATUS = null;
+            string message = " 要刪除了?";
+
+            DialogResult dialogResult = MessageBox.Show(message.ToString(), "要刪除了?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                DEL();
+
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+            }
+
+            Search();
+            MessageBox.Show("完成");
+        }
         #endregion
 
-       
+
     }
 }
