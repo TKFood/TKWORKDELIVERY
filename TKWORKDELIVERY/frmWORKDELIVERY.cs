@@ -199,7 +199,7 @@ namespace TKWORKDELIVERY
             textBox3.Text = null;
             textBox4.Text = null;
             textBoxID.Text = null;
-            textBox1.ReadOnly = false;
+            //textBox1.ReadOnly = false;
             textBox2.ReadOnly = false;
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
@@ -434,6 +434,45 @@ namespace TKWORKDELIVERY
             }
 
         }
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            textBox4.Text = null;
+            if (!string.IsNullOrEmpty(comboBox2.SelectedValue.ToString()) && !comboBox2.SelectedValue.ToString().Equals("System.Data.DataRowView"))
+            {
+                textBox4.Text = comboBox2.SelectedValue.ToString();
+            }
+        }
+
+        public void SETFASTREPORT()
+        {
+
+            string SQL;
+            Report report1 = new Report();
+            report1.Load(@"REPORT\工作交付.frx");
+
+            report1.Dictionary.Connections[0].ConnectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+            //report1.Dictionary.Connections[0].ConnectionString = "server=192.168.1.105;database=TKPUR;uid=sa;pwd=dsc";
+
+            TableDataSource Table = report1.GetDataSource("Table") as TableDataSource;
+            SQL = SETFASETSQL();
+            Table.SelectCommand = SQL;
+            report1.Preview = previewControl1;
+            report1.Show();
+
+        }
+
+        public string SETFASETSQL()
+        {
+            StringBuilder FASTSQL = new StringBuilder();
+
+            FASTSQL.AppendFormat(@" SELECT [NO] AS '編號',CONVERT(NVARCHAR,[DATES],111) AS '日期',[CREATEOR] AS '交辨人',[SENDTO] AS '被交辨人',[MESSAGE] AS '交辨內容',[REPLY] AS '回覆',[STATUS] AS '結案碼',[CREATEORID] AS '交辨ID',[ID] ");
+            FASTSQL.AppendFormat(@" FROM [TKWORKDELIVERY].[dbo].[WORKDELIVERY] ");
+            FASTSQL.AppendFormat(@" WHERE CONVERT(NVARCHAR,[DATES],112)>='{0}' AND CONVERT(NVARCHAR,[DATES],112)<='{1}' ", dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
+            FASTSQL.AppendFormat(@" AND [STATUS]='{0}' ", comboBox1.Text.ToString());
+            FASTSQL.AppendFormat(@"  ");
+
+            return FASTSQL.ToString();
+        }
 
 
         #endregion
@@ -496,6 +535,12 @@ namespace TKWORKDELIVERY
             Search();
             MessageBox.Show("完成");
         }
+        private void button6_Click(object sender, EventArgs e)
+        {
+            SETFASTREPORT();
+        }
+
+
         #endregion
 
 
