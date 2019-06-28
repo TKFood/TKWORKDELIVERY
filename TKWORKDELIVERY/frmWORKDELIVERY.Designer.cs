@@ -75,6 +75,8 @@
             this.button6 = new System.Windows.Forms.Button();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.previewControl1 = new FastReport.Preview.PreviewControl();
+            this.label15 = new System.Windows.Forms.Label();
+            this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -297,7 +299,6 @@
             this.tableLayoutPanel2.Controls.Add(this.label6, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.dateTimePicker3, 3, 1);
             this.tableLayoutPanel2.Controls.Add(this.textBox1, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label4, 2, 2);
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.textBox2, 1, 3);
             this.tableLayoutPanel2.Controls.Add(this.textBox3, 1, 5);
@@ -308,8 +309,11 @@
             this.tableLayoutPanel2.Controls.Add(this.textBoxID, 1, 8);
             this.tableLayoutPanel2.Controls.Add(this.label8, 0, 8);
             this.tableLayoutPanel2.Controls.Add(this.comboBox2, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.comboBox3, 3, 2);
             this.tableLayoutPanel2.Controls.Add(this.comboBox4, 1, 7);
+            this.tableLayoutPanel2.Controls.Add(this.comboBox3, 4, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label4, 3, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label15, 5, 2);
+            this.tableLayoutPanel2.Controls.Add(this.comboBox6, 6, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -424,11 +428,11 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(243, 92);
+            this.label4.Location = new System.Drawing.Point(363, 92);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(114, 16);
             this.label4.TabIndex = 37;
-            this.label4.Text = "被交辨人";
+            this.label4.Text = "被交辨人1";
             // 
             // label3
             // 
@@ -538,7 +542,7 @@
             // 
             this.comboBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(363, 90);
+            this.comboBox3.Location = new System.Drawing.Point(483, 90);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(114, 24);
             this.comboBox3.TabIndex = 50;
@@ -703,6 +707,25 @@
             this.previewControl1.Size = new System.Drawing.Size(1118, 655);
             this.previewControl1.TabIndex = 4;
             // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(603, 92);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(114, 16);
+            this.label15.TabIndex = 52;
+            this.label15.Text = "被交辨人2";
+            // 
+            // comboBox6
+            // 
+            this.comboBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox6.FormattingEnabled = true;
+            this.comboBox6.Location = new System.Drawing.Point(723, 88);
+            this.comboBox6.Name = "comboBox6";
+            this.comboBox6.Size = new System.Drawing.Size(114, 24);
+            this.comboBox6.TabIndex = 53;
+            // 
             // frmWORKDELIVERY
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
@@ -788,5 +811,7 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.ComboBox comboBox5;
         private FastReport.Preview.PreviewControl previewControl1;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox comboBox6;
     }
 }

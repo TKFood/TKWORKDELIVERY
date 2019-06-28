@@ -57,6 +57,7 @@ namespace TKWORKDELIVERY
             InitializeComponent();
             comboBox2load();
             comboBox3load();
+            comboBox6load();
         }
 
         #region FUNCTION
@@ -102,6 +103,26 @@ namespace TKWORKDELIVERY
 
 
         }
+        public void comboBox6load()
+        {
+            connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+            sqlConn = new SqlConnection(connectionString);
+            StringBuilder Sequel = new StringBuilder();
+            Sequel.AppendFormat(@"SELECT [ID],[NAME],[EMAIL] FROM [TKWORKDELIVERY].[dbo].[EMP] ORDER BY  [ID]");
+            SqlDataAdapter da = new SqlDataAdapter(Sequel.ToString(), sqlConn);
+            DataTable dt = new DataTable();
+            sqlConn.Open();
+
+            dt.Columns.Add("ID", typeof(string));
+            dt.Columns.Add("NAME", typeof(string));
+            da.Fill(dt);
+            comboBox6.DataSource = dt.DefaultView;
+            comboBox6.ValueMember = "ID";
+            comboBox6.DisplayMember = "NAME";
+            sqlConn.Close();
+
+
+        }
         public void Search()
         {
             ds.Clear();
@@ -115,7 +136,7 @@ namespace TKWORKDELIVERY
                 sbSql.Clear();
                 sbSqlQuery.Clear();
 
-                sbSql.AppendFormat(@" SELECT [NO] AS '編號',CONVERT(NVARCHAR,[DATES],111) AS '日期',[CREATEOR] AS '交辨人',[SENDTO] AS '被交辨人',[MESSAGE] AS '交辨內容',[REPLY] AS '回覆',[STATUS] AS '結案碼',[CREATEORID] AS '交辨ID',[ID] ");
+                sbSql.AppendFormat(@" SELECT [NO] AS '編號',CONVERT(NVARCHAR,[DATES],111) AS '日期',[CREATEOR] AS '交辨人',[SENDTO] AS '被交辨人',[SENDTO2] AS '被交辨人2',[MESSAGE] AS '交辨內容',[REPLY] AS '回覆',[STATUS] AS '結案碼',[CREATEORID] AS '交辨ID',[ID] ");
                 sbSql.AppendFormat(@" FROM [TKWORKDELIVERY].[dbo].[WORKDELIVERY] ");
                 sbSql.AppendFormat(@" WHERE CONVERT(NVARCHAR,[DATES],112)>='{0}' AND CONVERT(NVARCHAR,[DATES],112)<='{1}' ",dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
                 sbSql.AppendFormat(@" AND [STATUS]='{0}' ",comboBox1.Text.ToString());
@@ -170,8 +191,9 @@ namespace TKWORKDELIVERY
                     dateTimePicker3.Value = Convert.ToDateTime(row.Cells["日期"].Value.ToString());
 
                     comboBox2.Text = row.Cells["交辨人"].Value.ToString();
-                    comboBox3.Text = row.Cells["被交辨人"].Value.ToString();
+                    comboBox3.Text = row.Cells["被交辨人"].Value.ToString();                    
                     comboBox4.Text = row.Cells["結案碼"].Value.ToString();
+                    comboBox6.Text = row.Cells["被交辨人2"].Value.ToString();
 
                     textBox1.Text = row.Cells["編號"].Value.ToString();                   
                     textBox2.Text = row.Cells["交辨內容"].Value.ToString();
@@ -309,7 +331,7 @@ namespace TKWORKDELIVERY
                 tran = sqlConn.BeginTransaction();
 
                 sbSql.AppendFormat(" UPDATE   [TKWORKDELIVERY].[dbo].[WORKDELIVERY]");
-                sbSql.AppendFormat(" SET [NO]='{0}',[DATES]='{1}',[CREATEOR]='{2}',[SENDTO]='{3}',[MESSAGE]='{4}',[REPLY]='{5}',[STATUS]='{6}',[CREATEORID]='{7}'", textBox1.Text, dateTimePicker3.Value.ToString("yyyyMMdd"), comboBox2.Text, comboBox3.Text, textBox2.Text, textBox3.Text, comboBox4.Text, textBox4.Text);
+                sbSql.AppendFormat(" SET [NO]='{0}',[DATES]='{1}',[CREATEOR]='{2}',[SENDTO]='{3}',[MESSAGE]='{4}',[REPLY]='{5}',[STATUS]='{6}',[CREATEORID]='{7}',[SENDTO2]='{8}'", textBox1.Text, dateTimePicker3.Value.ToString("yyyyMMdd"), comboBox2.Text, comboBox3.Text, textBox2.Text, textBox3.Text, comboBox4.Text, textBox4.Text,comboBox6.Text);
                 sbSql.AppendFormat(" WHERE  [ID]='{0}'",textBoxID.Text);
                 sbSql.AppendFormat(" ");
                 sbSql.AppendFormat(" ");
@@ -358,8 +380,8 @@ namespace TKWORKDELIVERY
 
                 sbSql.Clear();
                 sbSql.AppendFormat(" INSERT INTO [TKWORKDELIVERY].[dbo].[WORKDELIVERY]");
-                sbSql.AppendFormat(" ( [NO],[DATES],[CREATEOR],[SENDTO],[MESSAGE],[REPLY],[STATUS],[CREATEORID])");
-                sbSql.AppendFormat(" VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}')", textBox1.Text, dateTimePicker3.Value.ToString("yyyyMMdd"), comboBox2.Text, comboBox3.Text, textBox2.Text, textBox3.Text, comboBox4.Text, textBox4.Text);
+                sbSql.AppendFormat(" ( [NO],[DATES],[CREATEOR],[SENDTO],[MESSAGE],[REPLY],[STATUS],[CREATEORID],[SENDTO2])");
+                sbSql.AppendFormat(" VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}')", textBox1.Text, dateTimePicker3.Value.ToString("yyyyMMdd"), comboBox2.Text, comboBox3.Text, textBox2.Text, textBox3.Text, comboBox4.Text, textBox4.Text, comboBox6.Text);
                 sbSql.AppendFormat(" ");
                 sbSql.AppendFormat(" ");
 
@@ -467,7 +489,7 @@ namespace TKWORKDELIVERY
         {
             StringBuilder FASTSQL = new StringBuilder();
 
-            FASTSQL.AppendFormat(@" SELECT [NO] AS '編號',CONVERT(NVARCHAR,[DATES],111) AS '日期',[CREATEOR] AS '交辨人',[SENDTO] AS '被交辨人',[MESSAGE] AS '交辨內容',[REPLY] AS '回覆',[STATUS] AS '結案碼',[CREATEORID] AS '交辨ID',[ID] ");
+            FASTSQL.AppendFormat(@" SELECT [NO] AS '編號',CONVERT(NVARCHAR,[DATES],111) AS '日期',[CREATEOR] AS '交辨人',[SENDTO] AS '被交辨人',[SENDTO2] AS '被交辨人2',[MESSAGE] AS '交辨內容',[REPLY] AS '回覆',[STATUS] AS '結案碼',[CREATEORID] AS '交辨ID',[ID] ");
             FASTSQL.AppendFormat(@" FROM [TKWORKDELIVERY].[dbo].[WORKDELIVERY] ");
             FASTSQL.AppendFormat(@" WHERE CONVERT(NVARCHAR,[DATES],112)>='{0}' AND CONVERT(NVARCHAR,[DATES],112)<='{1}' ", dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
             FASTSQL.AppendFormat(@" AND [STATUS]='{0}' ", comboBox1.Text.ToString());
