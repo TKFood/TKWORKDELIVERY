@@ -48,7 +48,7 @@ namespace TKWORKDELIVERY
         Thread TD;
 
         string STATUS = null;
-        string BUYNO;
+        string NO;
         string OLDBUYNO;
         string CHECKYN = "N";
 
@@ -221,6 +221,78 @@ namespace TKWORKDELIVERY
             textBox4.ReadOnly = true;
         }
 
+        public string GETNO()
+        {
+
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                StringBuilder sbSql = new StringBuilder();
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+                ds4.Clear();
+
+                sbSql.Clear();
+
+                sbSql.AppendFormat(@"  SELECT ISNULL(MAX([NO]),'000000000000') AS NO");
+                sbSql.AppendFormat(@"  FROM [TKWORKDELIVERY].[dbo].[WORKDELIVERY] ");
+                sbSql.AppendFormat(@"  WHERE [NO] LIKE '{0}%'", dateTimePicker3.Value.ToString("yyyyMMdd"));
+                sbSql.AppendFormat(@"  ");
+                sbSql.AppendFormat(@"  ");
+
+                adapter4 = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilder4 = new SqlCommandBuilder(adapter4);
+                sqlConn.Open();
+                ds4.Clear();
+                adapter4.Fill(ds4, "TEMPds4");
+                sqlConn.Close();
+
+
+                if (ds4.Tables["TEMPds4"].Rows.Count == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    if (ds4.Tables["TEMPds4"].Rows.Count >= 1)
+                    {
+                        NO = SETNO(ds4.Tables["TEMPds4"].Rows[0]["NO"].ToString());
+                        return NO;
+
+                    }
+                    return null;
+                }
+
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
+        public string SETNO(string NO)
+        {
+            if (NO.Equals("000000000000"))
+            {
+                return dateTimePicker3.Value.ToString("yyyyMMdd") + "0001";
+            }
+
+            else
+            {
+                int serno = Convert.ToInt16(NO.Substring(8, 4));
+                serno = serno + 1;
+                string temp = serno.ToString();
+                temp = temp.PadLeft(4, '0');
+                return dateTimePicker3.Value.ToString("yyyyMMdd") + temp.ToString();
+            }
+        }
         public void UPDATE()
         {
             try
@@ -273,7 +345,7 @@ namespace TKWORKDELIVERY
         {
             try
             {
-
+                textBox1.Text = GETNO();
                 //add ZWAREWHOUSEPURTH
                 connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
                 sqlConn = new SqlConnection(connectionString);
