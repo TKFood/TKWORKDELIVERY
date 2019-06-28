@@ -286,7 +286,9 @@ namespace TKWORKDELIVERY
 
                 sbSql.Clear();
 
-              
+                sbSql.AppendFormat(" DELETE [TKWORKDELIVERY].[dbo].[WORKDELIVERY]");
+                sbSql.AppendFormat(" WHERE  [ID]='{0}'", textBoxID.Text);
+                sbSql.AppendFormat(" ");
                 sbSql.AppendFormat(" ");
 
                 cmd.Connection = sqlConn;
