@@ -382,7 +382,7 @@ namespace TKWORKDELIVERY
                 sbSql.AppendFormat(" INSERT INTO [TKWORKDELIVERY].[dbo].[WORKDELIVERY]");
                 sbSql.AppendFormat(" ( [NO],[DATES],[CREATEOR],[SENDTO],[MESSAGE],[REPLY],[STATUS],[CREATEORID],[SENDTO2])");
                 sbSql.AppendFormat(" VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}')", textBox1.Text, dateTimePicker3.Value.ToString("yyyyMMdd"), comboBox2.Text, comboBox3.Text, textBox2.Text, textBox3.Text, comboBox4.Text, textBox4.Text, comboBox6.Text);
-                sbSql.AppendFormat(" ");
+                sbSql.AppendFormat("  ");
                 sbSql.AppendFormat(" ");
 
 
