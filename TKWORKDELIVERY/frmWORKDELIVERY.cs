@@ -136,7 +136,7 @@ namespace TKWORKDELIVERY
                 sbSql.Clear();
                 sbSqlQuery.Clear();
 
-                sbSql.AppendFormat(@" SELECT [NO] AS '編號',CONVERT(NVARCHAR,[DATES],111) AS '日期',[CREATEOR] AS '交辨人',[SENDTO] AS '被交辨人',[SENDTO2] AS '被交辨人2',[MESSAGE] AS '交辨內容',[REPLY] AS '回覆',[STATUS] AS '結案碼',[CREATEORID] AS '交辨ID',[ID] ");
+                sbSql.AppendFormat(@" SELECT [NO] AS '編號',CONVERT(NVARCHAR,[DATES],111) AS '日期',[CREATEOR] AS '交付人',[SENDTO] AS '交辨人',[SENDTO2] AS '交辨人2',[MESSAGE] AS '交辨內容',[REPLY] AS '回覆',[STATUS] AS '結案碼',[CREATEORID] AS '交辨ID',[ID] ");
                 sbSql.AppendFormat(@" FROM [TKWORKDELIVERY].[dbo].[WORKDELIVERY] ");
                 sbSql.AppendFormat(@" WHERE CONVERT(NVARCHAR,[DATES],112)>='{0}' AND CONVERT(NVARCHAR,[DATES],112)<='{1}' ",dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
                 sbSql.AppendFormat(@" AND [STATUS]='{0}' ",comboBox1.Text.ToString());
@@ -190,10 +190,10 @@ namespace TKWORKDELIVERY
 
                     dateTimePicker3.Value = Convert.ToDateTime(row.Cells["日期"].Value.ToString());
 
-                    comboBox2.Text = row.Cells["交辨人"].Value.ToString();
-                    comboBox3.Text = row.Cells["被交辨人"].Value.ToString();                    
+                    comboBox2.Text = row.Cells["交付人"].Value.ToString();
+                    comboBox3.Text = row.Cells["交辨人"].Value.ToString();                    
                     comboBox4.Text = row.Cells["結案碼"].Value.ToString();
-                    comboBox6.Text = row.Cells["被交辨人2"].Value.ToString();
+                    comboBox6.Text = row.Cells["交辨人2"].Value.ToString();
 
                     textBox1.Text = row.Cells["編號"].Value.ToString();                   
                     textBox2.Text = row.Cells["交辨內容"].Value.ToString();
@@ -489,7 +489,7 @@ namespace TKWORKDELIVERY
         {
             StringBuilder FASTSQL = new StringBuilder();
 
-            FASTSQL.AppendFormat(@" SELECT [NO] AS '編號',CONVERT(NVARCHAR,[DATES],111) AS '日期',[CREATEOR] AS '交辨人',[SENDTO] AS '被交辨人',[SENDTO2] AS '被交辨人2',[MESSAGE] AS '交辨內容',[REPLY] AS '回覆',[STATUS] AS '結案碼',[CREATEORID] AS '交辨ID',[ID] ");
+            FASTSQL.AppendFormat(@" SELECT [NO] AS '編號',CONVERT(NVARCHAR,[DATES],111) AS '日期',[CREATEOR] AS '交付人',[SENDTO] AS '交辨人',[SENDTO2] AS '交辨人2',[MESSAGE] AS '交辨內容',[REPLY] AS '回覆',[STATUS] AS '結案碼',[CREATEORID] AS '交辨ID',[ID] ");
             FASTSQL.AppendFormat(@" FROM [TKWORKDELIVERY].[dbo].[WORKDELIVERY] ");
             FASTSQL.AppendFormat(@" WHERE CONVERT(NVARCHAR,[DATES],112)>='{0}' AND CONVERT(NVARCHAR,[DATES],112)<='{1}' ", dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
             FASTSQL.AppendFormat(@" AND [STATUS]='{0}' ", comboBox1.Text.ToString());

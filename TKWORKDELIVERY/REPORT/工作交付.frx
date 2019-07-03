@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="06/28/2019 10:25:21" ReportInfo.Modified="06/28/2019 10:48:50" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="06/28/2019 10:25:21" ReportInfo.Modified="07/03/2019 09:51:13" ReportInfo.CreatorVersion="2016.4.4.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9K/Y7Pg4+pCpcjR7lO3+hFt">
-      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="/****** SSMS 中 SelectTopNRows 命令的指令碼  ******/&#13;&#10;SELECT [NO] AS '編號',CONVERT(NVARCHAR,[DATES],112) AS '日期',[CREATEOR] AS '交辨人',[SENDTO] AS '被交辨人',[SENDTO2] AS '被交辨人2',[MESSAGE] AS '交辨內容',[REPLY] AS '回覆',[STATUS] AS '結案碼',[CREATEORID] AS '交辨ID',[ID]&#13;&#10;FROM [TKWORKDELIVERY].[dbo].[WORKDELIVERY]&#13;&#10;WHERE CONVERT(NVARCHAR,[DATES],112)&gt;='20190628' AND CONVERT(NVARCHAR,[DATES],112)&lt;='20190628'&#13;&#10;AND [STATUS]='N'">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9LY+mHsmdM4GDhX9nHGfp6Z">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="/****** SSMS 中 SelectTopNRows 命令的指令碼  ******/&#13;&#10;SELECT [NO] AS '編號',CONVERT(NVARCHAR,[DATES],112) AS '日期',[CREATEOR] AS '交付人',[SENDTO] AS '交辨人',[SENDTO2] AS '交辨人2',[MESSAGE] AS '交辨內容',[REPLY] AS '回覆',[STATUS] AS '結案碼',[CREATEORID] AS '交辨ID',[ID]&#13;&#10;FROM [TKWORKDELIVERY].[dbo].[WORKDELIVERY]&#13;&#10;WHERE CONVERT(NVARCHAR,[DATES],112)&gt;='20190628' AND CONVERT(NVARCHAR,[DATES],112)&lt;='20190628'&#13;&#10;AND [STATUS]='N'">
         <Column Name="編號" DataType="System.String"/>
         <Column Name="日期" DataType="System.String"/>
         <Column Name="交辨人" DataType="System.String"/>
-        <Column Name="被交辨人" DataType="System.String"/>
         <Column Name="交辨內容" DataType="System.String"/>
         <Column Name="回覆" DataType="System.String"/>
         <Column Name="結案碼" DataType="System.String"/>
         <Column Name="交辨ID" DataType="System.String"/>
         <Column Name="ID" DataType="System.Guid"/>
-        <Column Name="被交辨人2" DataType="System.String"/>
+        <Column Name="交付人" DataType="System.String"/>
+        <Column Name="交辨人2" DataType="System.String"/>
       </TableDataSource>
     </MsSqlDataConnection>
   </Dictionary>
@@ -23,23 +23,23 @@
     <ColumnHeaderBand Name="ColumnHeader1" Top="41.65" Width="1047.06" Height="18.9">
       <TextObject Name="Text3" Width="94.5" Height="18.9" Border.Lines="All" Text="編號" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text5" Left="94.5" Width="85.05" Height="18.9" Border.Lines="All" Text="日期" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text7" Left="179.55" Width="66.15" Height="18.9" Border.Lines="All" Text="交辨人" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text9" Left="245.7" Width="66.15" Height="18.9" Border.Lines="All" Text="被交辨人" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text7" Left="179.55" Width="66.15" Height="18.9" Border.Lines="All" Text="交付人" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text9" Left="245.7" Width="66.15" Height="18.9" Border.Lines="All" Text="交辨人" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text11" Left="378" Width="302.4" Height="18.9" Border.Lines="All" Text="交辨內容" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text13" Left="680.4" Width="321.3" Height="18.9" Border.Lines="All" Text="回覆" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text15" Left="1001.7" Width="47.25" Height="18.9" Border.Lines="All" Text="結案碼" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text17" Left="311.85" Width="66.15" Height="18.9" Border.Lines="All" Text="被交辨人2" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text17" Left="311.85" Width="66.15" Height="18.9" Border.Lines="All" Text="交辨人2" HorzAlign="Center" VertAlign="Center"/>
     </ColumnHeaderBand>
-    <GroupHeaderBand Name="GroupHeader1" Top="64.39" Width="1047.06" Condition="[Table.被交辨人]">
+    <GroupHeaderBand Name="GroupHeader1" Top="64.39" Width="1047.06" Condition="[Table.交辨人]">
       <DataBand Name="Data1" Top="68.24" Width="1047.06" Height="18.9" CanGrow="true" DataSource="Table">
         <TextObject Name="Text2" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.編號]" HorzAlign="Center" VertAlign="Center"/>
         <TextObject Name="Text4" Left="94.5" Width="85.05" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.日期]" HorzAlign="Center" VertAlign="Center"/>
-        <TextObject Name="Text6" Left="179.55" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.交辨人]" HorzAlign="Center" VertAlign="Center"/>
-        <TextObject Name="Text8" Left="245.7" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.被交辨人]" HorzAlign="Center" VertAlign="Center"/>
+        <TextObject Name="Text6" Left="179.55" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.交付人]" HorzAlign="Center" VertAlign="Center"/>
+        <TextObject Name="Text8" Left="245.7" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.交辨人]" HorzAlign="Center" VertAlign="Center"/>
         <TextObject Name="Text10" Left="378" Width="302.4" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.交辨內容]" HorzAlign="Center" VertAlign="Center"/>
         <TextObject Name="Text12" Left="680.4" Width="321.3" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.回覆]" HorzAlign="Center" VertAlign="Center"/>
         <TextObject Name="Text14" Left="1001.7" Width="47.25" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.結案碼]" HorzAlign="Center" VertAlign="Center"/>
-        <TextObject Name="Text16" Left="311.85" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.被交辨人2]" HorzAlign="Center" VertAlign="Center"/>
+        <TextObject Name="Text16" Left="311.85" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.交辨人2]" HorzAlign="Center" VertAlign="Center"/>
       </DataBand>
       <GroupFooterBand Name="GroupFooter1" Top="90.98" Width="1047.06"/>
     </GroupHeaderBand>
